@@ -1,0 +1,10 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import srd as srd
+
+# Listing 4.3 Numerical example of impulse and frequency response
+Ts = 1/100
+time = 10
+t = np.arange(0,time,Ts)
+h = np.exp(-t)
+srd.plotspec(h,Ts)
