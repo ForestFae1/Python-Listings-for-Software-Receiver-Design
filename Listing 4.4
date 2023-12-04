@@ -1,0 +1,28 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.signal as sp
+import srd as srd
+from scipy.signal import lfilter
+
+# Listing 4.4 Using a linear filter to improve SNR
+time = 3
+Ts = 1/20000
+fs = 1/Ts
+freqs = .5*fs*np.array([0, 0.29, 0.3, 0.4, 0.41, 1])
+amps = np.array([0, 1, 0])
+b = sp.remez(100, freqs, amps, fs=fs)
+n = .25*(np.random.randn(1, int(time/Ts)))
+x = sp.lfilter(b, 1, 2 * np.random.randn(1, int(time/Ts)))
+y = sp.lfilter(b, 1, x+n)
+yx = sp.lfilter(b, 1, x)
+yn = sp.lfilter(b, 1, n)
+z = yx + yn
+diffzy = np.max(np.abs(z - y))
+snrinp = np.power(x, 2) / np.power(n, 2)
+snrout = np.power(yx, 2) / np.power(yn, 2)
+srd.plotspec(np.transpose(n),Ts) # checking spectra
+srd.plotspec(np.transpose(x),Ts)
+srd.plotspec(np.transpose(x+n),Ts)
+srd.plotspec(np.transpose(y),Ts)
+plt.show()
+
