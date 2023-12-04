@@ -1,0 +1,10 @@
+# Listing 3.1 Plot the spectrum of a square wave
+import numpy as np
+import matplotlib.pyplot as plt
+import srd as srd
+f = 10 # frequency
+time = 2 # length of time
+Ts = 1/1000 # time interval between samples
+t = np.arange(0,time,Ts)# create a time vector
+x = np.sign(np.cos(2*np.pi*f*t))
+srd.plotspec(x,Ts)
