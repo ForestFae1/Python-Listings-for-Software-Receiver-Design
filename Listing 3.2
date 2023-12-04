@@ -1,0 +1,9 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import srd as srd
+
+# Listing 3.2 Plot the spectrum of a noise signal
+time = 1
+Ts = 1/10000
+x = np.transpose(np.random.randn(1,int(time/Ts)))
+srd.plotspec(x,Ts)
