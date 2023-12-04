@@ -1,0 +1,17 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import srd as srd
+
+# Listing 3.5 Change the frequency of the input
+time = 0.5
+Ts = 1/10000
+t = np.arange(0,time,Ts)
+fc = 1000
+fi = 100
+cmod = np.cos(2*np.pi*fc*t) # create cos of freq fc
+x = np.cos(2*np.pi*fi*t) # input is cos of freq fi
+y = cmod*x # multiply input by cmod
+
+srd.plotspec(cmod,Ts)
+srd.plotspec(x,Ts)
+srd.plotspec(y,Ts) 
